@@ -12,8 +12,17 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('DailySales')
 
-sales = SHEET.worksheet('sales')
 
-data = sales.get_all_values()
+def sales_data():
+    """
+    Get end of day sales totals by department
+    """
+    print('Please enter sales by department')
+    print('Figures should be in the format requested')
+    print('Example dd/mm/yyyy or 1234.56 \n')
 
-print(data)
+    returned_date = input("Please enter todays Date here dd/mm/yyyy: ")
+    print(f"The date priovided {returned_date}")
+
+
+sales_data() 
