@@ -1,3 +1,4 @@
+"""Google sheet import"""
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -13,117 +14,178 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('DailySales')
 
 
-def sales_data():
+def welcome():
     """
-    Get end of day sales totals by department
+    Greets the user and informs of how they should use the program
     """
-    
+    print("welcome to Daily Sales, your financial record system")
     print('Please enter todays sales by department')
     print('Figures should be in the format requested')
     print('Example dd/mm/yyyy or 1234.56 \n')
 
+
+def sales_data_hot():
+    """
+    Get end of day sales total for Hot Food sales
+    """
     returned_date = input("Please enter todays Date here dd/mm/yyyy: ")
     print(f"Date provided: {returned_date} \n")
 
     while True:
-        returned_hot_food = input("Please enter todays Hot Food sales eg 12.50: ")
+        returned_hot_food = input("Please enter Hot Food sales eg 12.50: ")
         sales_hot_food = returned_hot_food.split(",")
         validate_sales(sales_hot_food)
 
         if validate_sales(sales_hot_food):
             print('Hot Food sales are valid')
             break
+
     return sales_hot_food
 
+
+def sales_data_cake():
+    """
+    Get End of day sales data for Cake
+    """
     while True:
-        returned_cakes = input("Please enter todays Cake sales eg 12.50: ")
+        returned_cakes = input("Please enter Cake sales eg 12.50: ")
         sales_cakes = returned_cakes.split(",")
         validate_sales(sales_cakes)
-        
+
         if validate_sales(sales_cakes):
             print('Cakes sales are valid')
             break
+
     return sales_cakes
 
+
+def sales_data_bread():
+    """
+    Gets end of day sales data for Bread
+    """
     while True:
-        returned_bread = input("Please enter todays Bread sales eg 12.50: ")
+        returned_bread = input("Please enter Bread sales eg 12.50: ")
         sales_bread = returned_bread.split(",")
         validate_sales(sales_bread)
 
         if validate_sales(sales_bread):
             print('Bread sales are valid')
             break
+
     return sales_bread
 
+
+def sales_data_coffee():
+    """
+    Gets end of day sales data for Coffee
+    """
     while True:
-        returned_coffee = input("Please enter todays Coffee sales eg 12.50: ")
+        returned_coffee = input("Please enter Coffee sales eg 12.50: ")
         sales_coffee = returned_coffee.split(",")
         validate_sales(sales_coffee)
-    
+
         if validate_sales(sales_coffee):
             print('Coffee sales are valid')
             break
+
     return sales_coffee
 
+
+def sales_data_0_vat():
+    """
+    Gets end of day sales data for 0% VAT items
+    """
     while True:
-        returned_0_vat = input("Please enter todays 0% VAT sales eg 12.50: ")
+        returned_0_vat = input("Please enter 0% VAT sales eg 12.50: ")
         sales_0_vat = returned_0_vat.split(",")
         validate_sales(sales_0_vat)
 
         if validate_sales(sales_0_vat):
             print('0% VAT sales are valid')
             break
+
     return sales_0_vat
 
+
+def sales_data_wine():
+    """
+    Gets end of day sales data for Wine
+    """
     while True:
-        returned_wine = input("Please enter todays Wine sales eg 12.50: ")
+        returned_wine = input("Please enter Wine sales eg 12.50: ")
         sales_wine = returned_wine.split(",")
         validate_sales(sales_wine)
 
         if validate_sales(sales_wine):
             print('Wine sales are valid')
             break
+
     return sales_wine
 
+
+def sales_data_chilled():
+    """
+    Gets end of day sales data for Chilled Produce
+    """
     while True:
-        returned_chilled = input("Please enter todays Chilled sales eg 12.50: ")
+        returned_chilled = input("Please enter Chilled sales eg 12.50: ")
         sales_chilled = returned_chilled.split(",")
         validate_sales(sales_chilled)
 
         if validate_sales(sales_chilled):
             print('Chilled sales are valid')
             break
+
     return sales_chilled
 
+
+def sales_data_minerals():
+    """
+    Gets end of day sales data for Minerals
+    """
     while True:
-        returned_minerals = input("Please enter todays Minerals sales eg 12.50: ")
+        returned_minerals = input("Please enter Minerals sales eg 12.50: ")
         sales_minerals = returned_minerals.split(",")
         validate_sales(sales_minerals)
 
         if validate_sales(sales_minerals):
             print('Mineral sales are valid')
             break
+
     return sales_minerals
 
+
+def sales_data_sweets():
+    """
+    Gets end of day sales data for Sweets
+    """
     while True:
-        returned_sweets = input("Please enter todays Sweets sales eg 12.50: ")
+        returned_sweets = input("Please enter Sweets sales eg 12.50: ")
         sales_sweets = returned_sweets.split(",")
         validate_sales(sales_sweets)
-        
+
         if validate_sales(sales_sweets):
             print('Sweet sales are valid')
             break
+
     return sales_sweets
 
+
+def sales_data_choc():
+    """
+    Gets end of day sales data for Chocolate
+    """
     while True:
-        returned_choc = input("Please enter todays Chocolate sales eg 12.50: ")
+        returned_choc = input("Please enter Chocolate sales eg 12.50: ")
         sales_choc = returned_choc.split(",")
         validate_sales(sales_choc)
 
         if validate_sales(sales_choc):
             print('Chocolate sales are valid')
             break
-    return sales_choc    
+
+    return sales_choc
+    # move the return statemetns togethet in a stack
 
 
 def validate_sales(values):
@@ -138,11 +200,21 @@ def validate_sales(values):
             raise ValueError(
                 f"1 numeric value required, you provided {len(values)}"
             )
-    except ValueError as e:
-        print(f"Invalid data: {e}, you must input a numeric value.\n")
+    except ValueError as error:
+        print(f"Invalid data: {error}, you must input a numeric value.\n")
         return False
 
-    return True    
+    return True
 
 
-sales_data()
+welcome()
+sales_data_hot()
+sales_data_cake()
+sales_data_bread()
+sales_data_coffee()
+sales_data_0_vat()
+sales_data_wine()
+sales_data_chilled()
+sales_data_minerals()
+sales_data_sweets()
+sales_data_choc()
