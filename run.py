@@ -24,12 +24,19 @@ def welcome():
     print('Example dd/mm/yyyy or 1234.56 \n')
 
 
+def date_recorded():
+    """
+    Takes the date as an inout from the user
+    """
+    returned_date = input("Please enter todays Date here dd/mm/yyyy: ")
+    print(f"Date provided: {returned_date} \n")
+    return returned_date
+
+
 def sales_data_hot():
     """
     Get end of day sales total for Hot Food sales
     """
-    returned_date = input("Please enter todays Date here dd/mm/yyyy: ")
-    print(f"Date provided: {returned_date} \n")
 
     while True:
         returned_hot_food = input("Please enter Hot Food sales eg 12.50: ")
@@ -207,9 +214,36 @@ def validate_sales(values):
     return True
 
 
+def update_sales_sheet(data):
+    """
+    Updates the Google sheet
+    """
+    print('Trying to update spread sheet')
+    sales_sheet = SHEET.worksheet('sales')
+    sales_sheet.append_row(data)
+    print("oh golly it worked")
+
+
 welcome()
-sales_data_hot()
-sales_data_cake()
+# """
+# Updating date input
+# """
+# date = date_recorded()
+# date_data = int(date)
+# update_sales_sheet(date_data)
+
+
+# Updateing hot food sales data10
+data_hot = sales_data_hot()
+hot_food_sales_data = [float(num) for num in data_hot]
+update_sales_sheet(hot_food_sales_data)
+
+# Updateing hot food sales data
+data_cake = sales_data_cake()
+cake_sales_data = [float(num) for num in data_hot]
+update_sales_sheet(cake_sales_data)
+
+
 sales_data_bread()
 sales_data_coffee()
 sales_data_0_vat()
