@@ -21,59 +21,64 @@ def sales_data():
     print('Figures should be in the format requested')
     print('Example dd/mm/yyyy or 1234.56 \n')
 
-    returned_date = (input("Please enter todays Date here dd/mm/yyyy: "))
+    returned_date = input("Please enter todays Date here dd/mm/yyyy: ")
     print(f"Date provided: {returned_date} \n")
-    
-    returned_hot_food = float(input("Please enter hot food sales eg 12.34: "))
-    print(f"Hot food sales where {returned_hot_food}\n")
-
-    returned_cakes = float(input("Please enter cake sales, eg 12.34: "))
-    print(f"Cake sales where {returned_cakes}\n")
-
-    returned_bread = float(input("Please enter bread sales, eg 12.34: "))
-    print(f"Bread sales where {returned_bread}\n")
-
-    returned_coffee = float(input("Please enter coffee sales, eg 12.34: "))
-    print(f"Coffee sales where {returned_coffee}\n")
-
-    returned_0_vat = float(input("Please enter 0% VAT sales, eg 12.34: "))
-    print(f"0% VAT sales where {returned_0_vat}\n")
-
-    returned_wine = float(input("Please enter wine sales, eg 12.34: "))
-    print(f"Wine sales where {returned_wine}\n")
-
-    returned_chilled = float(input("Please enter Chilled sales, eg 12.34: "))
-    print(f"Chilled goods sales where {returned_chilled}\n")
-
-    returned_minerals = float(input("Please enter mineral sales, eg 12.34: "))
-    print(f"Minerals sales where {returned_minerals}\n")
    
-    returned_sweets = float(input("Please enter sweet sales, eg 12.34: "))
-    print(f"Sweets sales where {returned_sweets}\n")
+    returned_hot_food = input("Please enter todays Hot Food sales eg 12.50: ")
+    sales_hot_food = returned_hot_food.split(",")
+    validate_sales(sales_hot_food)
+    
+    returned_cakes = input("Please enter todays Cake sales eg 12.50: ")
+    sales_cakes = returned_cakes.split(",")
+    validate_sales(sales_cakes)
 
-    returned_choc = float(input("Please enter chocolate sales, eg 12.34: "))
-    print(f"chocolate sales where {returned_choc}\n")
+    returned_bread = input("Please enter todays Bread sales eg 12.50: ")
+    sales_bread = returned_bread.split(",")
+    validate_sales(sales_bread)
 
-    total_sales = (returned_hot_food + returned_cakes + returned_bread
-                   + returned_coffee + returned_0_vat + returned_wine 
-                   + returned_chilled + returned_minerals + returned_sweets 
-                   + returned_choc)
-    print(f'Thank you, todays total sales {total_sales}\n')
+    returned_coffee = input("Please enter todays Coffee sales eg 12.50: ")
+    sales_coffee = returned_coffee.split(",")
+    validate_sales(sales_coffee)
+
+    returned_0_vat = input("Please enter todays 0% VAT sales eg 12.50: ")
+    sales_0_vat = returned_0_vat.split(",")
+    validate_sales(sales_0_vat)
+
+    returned_wine = input("Please enter todays Wine sales eg 12.50: ")
+    sales_wine = returned_wine.split(",")
+    validate_sales(sales_wine)
+
+    returned_chilled = input("Please enter todays Chilled sales eg 12.50: ")
+    sales_chilled = returned_chilled.split(",")
+    validate_sales(sales_chilled)
+ 
+    returned_minerals = input("Please enter todays Minerals sales eg 12.50: ")
+    sales_minerals = returned_minerals.split(",")
+    validate_sales(sales_minerals)
+
+    returned_sweets = input("Please enter todays Sweets sales eg 12.50: ")
+    sales_sweets = returned_sweets.split(",")
+    validate_sales(sales_sweets)    
+
+    returned_choc = input("Please enter todays Chocolate sales eg 12.50: ")
+    sales_choc = returned_choc.split(",")
+    validate_sales(sales_choc)
 
 
 def validate_sales(values):
     """
-    Converts string to float 
+    Converts user input into floats.
+    Raises ValueError when input cant be converted into a float,
+    or if there is no user value.
     """
     try:
-        float(values)
-        print(f"The value you entered was {values}")
-        raise ValueError(
-                print(f"Thank you, {values} \n ")
+        [float(value) for value in values]
+        if len(values) != 1:
+            raise ValueError(
+                f"1 numeric value required, you provided {len(values)}"
             )
-
     except ValueError as e:
-        print(f'Invalid data {e}, please try again')    
+        print(f"Invalid data: {e}, you must input a numeric value.\n")
 
 
 sales_data()
